@@ -4,8 +4,6 @@ April 13, 2022
 Description
 */
 /*
-A string parameter called TARGET with a default value that is empty (i.e., empty string) and description of "Run Target Scripts".
-The stages for the pipeline are (in sequential order):
 
 1. Stage called Build that runs the requirements.txt file bring in the required Python package dependencies. It should print the text "Running The Requirements..." before running the requirements.txt file and print the test "Requirements Complete!" afterwards.
 
@@ -36,6 +34,7 @@ pipeline {
         stage("Build") {
             steps {
                 sh 'echo "Running The Requirements..."'
+                sh 'pip install -r requirements.txt'
                 sh 'echo "Requirements Complete"'
             }
         }

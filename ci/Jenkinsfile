@@ -1,18 +1,7 @@
 /*
 Joseph Wong
 April 13, 2022
-Description
-*/
-/*
-
-
-5. Stage called Zip that creates a zipfile containing all the .py files in the project (3 files - main.py, data.py, report.py). The Python filenames should not be hard-coded. The zipfile should be made into a build artifact (i.e., it is available for download on the main Jenkins job page).
-In one of the above stages, output your Student Number and Group Number so that it shows up in the Console Output. You will need this for the screenshot required in the next question.
-
-Hints:
-
-You can use the echo keyword to print text to the console.
-For the Code Quantity Stage, you can use the "wc -l" command to get the number of lines in a file. You may want to Google this command or use the Linux man pages.
+Pipeline for sample_code1: This pipeline builds, checks code quality, checks code quantity, conditionally runs a script, and zips files into a build artifact for a python application
 */
 
 pipeline {
@@ -48,6 +37,14 @@ pipeline {
                 sh 'python3 main.py phone text output'
                 sh 'python3 main.py tablet csv output'
                 sh 'python3 main.py laptop json output'
+            }
+        }
+        stage("Zip") {
+            steps {
+                sh 'zip sample1.zip *.py'
+                archiveArtifacts artifacts: 'sample1.zip', fingerprint: true, onlyIfSuccessful: true
+                sh 'echo "Student Number: A01188820"'
+                sh 'echo "Group Number: 44"'
             }
         }
     }

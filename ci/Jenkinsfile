@@ -6,14 +6,7 @@ Description
 /*
 
 
-3. Stage called Code Quantity that counts and prints to the console the number of lines in each each Python file (3 files - main.py, data.py, report.py ). The Python filenames should not be hard-coded. See hint below on getting the number of lines in each file.
-
-4. Stage called Run Scripts that runs the main.py script only if the string parameter called TARGET is set to the value "run". It should call the main script three times with the following command line arguments in the python interpreter:
-main.py phone text output
-main.py tablet csv output
-main.py laptop json output
-The above runs of the script should display text, csv and json output (respectively) to the console and generate files output.txt, output.csv and output.json
-Stage called Zip that creates a zipfile containing all the .py files in the project (3 files - main.py, data.py, report.py). The Python filenames should not be hard-coded. The zipfile should be made into a build artifact (i.e., it is available for download on the main Jenkins job page).
+5. Stage called Zip that creates a zipfile containing all the .py files in the project (3 files - main.py, data.py, report.py). The Python filenames should not be hard-coded. The zipfile should be made into a build artifact (i.e., it is available for download on the main Jenkins job page).
 In one of the above stages, output your Student Number and Group Number so that it shows up in the Console Output. You will need this for the screenshot required in the next question.
 
 Hints:
@@ -45,6 +38,16 @@ pipeline {
         stage("Code Quantity") {
             steps {
                 sh 'wc -l *.py'
+            }
+        }
+        stage("Run Scripts") {
+            when {
+                expression { params.TARGET == "run" }
+            }
+            steps {
+                sh 'python3 main.py phone text output'
+                sh 'python3 main.py tablet csv output'
+                sh 'python3 main.py laptop json output'
             }
         }
     }

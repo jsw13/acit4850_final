@@ -41,8 +41,8 @@ pipeline {
         }
         stage("Zip") {
             steps {
-                sh 'zip sample1.zip *.py'
-                archiveArtifacts artifacts: 'sample1.zip', fingerprint: true, onlyIfSuccessful: true
+                sh 'zip app.zip *.py'
+                archiveArtifacts artifacts: 'app.zip', fingerprint: true, onlyIfSuccessful: true
                 sh 'echo "Student Number: A01188820"'
                 sh 'echo "Group Number: 44"'
             }

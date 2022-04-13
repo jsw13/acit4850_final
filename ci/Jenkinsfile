@@ -16,7 +16,7 @@ pipeline {
             steps {
                 sh 'echo "Running The Requirements..."'
                 sh 'pip install -r requirements.txt'
-                sh 'echo "Requirements Complete"'
+                sh 'echo "Requirements Complete!"'
             }
         }
         stage("Code Quality") {

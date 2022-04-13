@@ -5,12 +5,10 @@ Description
 */
 /*
 
-1. Stage called Build that runs the requirements.txt file bring in the required Python package dependencies. It should print the text "Running The Requirements..." before running the requirements.txt file and print the test "Requirements Complete!" afterwards.
 
-2. Stage called Code Quality that runs Python Lint (i.e., pylint-fail-under) on all 3 Python files (note: filenames should NOT be hard-coded). The code must achieve a score of 7 or more to pass this stage (note: you shouldn't need to fix the code to pass this stage).
+3. Stage called Code Quantity that counts and prints to the console the number of lines in each each Python file (3 files - main.py, data.py, report.py ). The Python filenames should not be hard-coded. See hint below on getting the number of lines in each file.
 
-Stage called Code Quantity that counts and prints to the console the number of lines in each each Python file (3 files - main.py, data.py, report.py ). The Python filenames should not be hard-coded. See hint below on getting the number of lines in each file.
-Stage called Run Scripts that runs the main.py script only if the string parameter called TARGET is set to the value "run". It should call the main script three times with the following command line arguments in the python interpreter:
+4. Stage called Run Scripts that runs the main.py script only if the string parameter called TARGET is set to the value "run". It should call the main script three times with the following command line arguments in the python interpreter:
 main.py phone text output
 main.py tablet csv output
 main.py laptop json output
@@ -42,6 +40,11 @@ pipeline {
         stage("Code Quality") {
             steps {
                 sh 'pylint-fail-under --fail_under 7.0 *.py'
+            }
+        }
+        stage("Code Quantity") {
+            steps {
+                sh 'wc -l *.py'
             }
         }
     }
